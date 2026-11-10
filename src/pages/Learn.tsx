@@ -80,7 +80,8 @@ export function Learn({ lessonId }: { lessonId?: string }) {
             {checkIds.length > 0 && <span className="muted small">{answered} of {checkIds.length} questions answered correctly. Answering all correctly completes the lesson.</span>}
           </div>
           <div className="lesson-actions">
-            <a className="btn" href="#/quiz">Practice in the Quiz</a>
+            <a className="btn primary" href={`#/quiz/${id}`}>Practice this lesson</a>
+            <a className="btn" href="#/quiz/sections">All practice sections</a>
             <a className="btn" href="#/games">Play the Games</a>
             <span className="spacer" />
             {idx > 0 && <button className="btn" onClick={() => go(LESSONS[idx - 1].id)}>Previous: {LESSONS[idx - 1].title}</button>}

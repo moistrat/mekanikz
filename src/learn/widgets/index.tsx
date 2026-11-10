@@ -5,6 +5,8 @@ import { Beam, StressStrain, Torsion } from './Materials'
 import { Incline, Lever, Truss, Vectors } from './Statics'
 import { Bernoulli, Carnot } from './Thermo'
 import { Units } from './Units'
+import { Fbd, Cables, Flywheel, Column, Gas, Resonance, Engine, Depth, Impulse } from './Interactive2'
+import { FrictionGraph, GearTypes, KinGraphs, Loads, Machines6, MomentArm, Process, StressTypes, Supports, TrussJoint } from './Diagrams'
 
 export function Widget({ id }: { id: WidgetId }) {
   switch (id) {
@@ -26,5 +28,24 @@ export function Widget({ id }: { id: WidgetId }) {
     case 'carnot': return <Carnot />
     case 'bernoulli': return <Bernoulli />
     case 'units': return <Units />
+    case 'process': return <Process />
+    case 'momentarm': return <MomentArm />
+    case 'supports': return <Supports />
+    case 'stresstypes': return <StressTypes />
+    case 'loads': return <Loads />
+    case 'machines6': return <Machines6 />
+    case 'geartypes': return <GearTypes />
+    case 'frictiongraph': return <FrictionGraph />
+    case 'kingraphs': return <KinGraphs />
+    case 'trussjoint': return <TrussJoint />
+    case 'fbd': return <Fbd />
+    case 'cables': return <Cables />
+    case 'flywheel': return <Flywheel />
+    case 'column': return <Column />
+    case 'gas': return <Gas />
+    case 'resonance': return <Resonance />
+    case 'engine': return <Engine />
+    case 'depth': return <Depth />
+    case 'impulse': return <Impulse />
   }
 }

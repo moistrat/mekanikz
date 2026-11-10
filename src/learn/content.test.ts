@@ -26,6 +26,10 @@ describe('course content', () => {
       expect(new Set(b.options).size, b.id).toBe(b.options.length)
     }
   })
+  it('every lesson has at least one visual, and most have two', () => {
+    for (const l of LESSONS) expect(l.blocks.filter((b) => b.t === 'widget').length, l.id).toBeGreaterThanOrEqual(1)
+    expect(LESSONS.filter((l) => l.blocks.filter((b) => b.t === 'widget').length >= 2).length).toBeGreaterThanOrEqual(15)
+  })
   it('spreads correct answers across positions', () => {
     const pos = new Set(LESSONS.flatMap((l) => l.blocks.flatMap((b) => (b.t === 'check' ? [b.correct] : []))))
     expect(pos.size).toBeGreaterThanOrEqual(3)

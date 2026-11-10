@@ -379,3 +379,35 @@ p.warn { margin: .6rem 0 0; }
 .canvas .guide-wire { stroke: var(--accent); stroke-width: 3.5; stroke-dasharray: 2 9; stroke-linecap: round; opacity: .8; pointer-events: none; }
 @keyframes pulse { 50% { opacity: .35; } }
 @media (prefers-reduced-motion: reduce) { .canvas .guide-ring { animation: none; } }
+
+/* difficulty */
+.diff-seg { margin-top: .5rem; }
+.factors { display: flex; gap: .4rem; flex-wrap: wrap; align-items: center; margin: .6rem 0 0; font-size: 12px; }
+.factors span { color: var(--text-faint); text-transform: uppercase; letter-spacing: .09em; font-size: 11px; font-weight: 600; margin-right: .2rem; }
+.factors b { border: 1px solid var(--accent-dim); color: var(--accent); border-radius: 999px; padding: .1rem .55rem; font-weight: 550; }
+.spring-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1rem; }
+.check-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .3rem; font-size: 13.5px; }
+.check-list li { display: flex; gap: .6rem; justify-content: space-between; border-bottom: 1px solid var(--border); padding: .3rem 0; color: var(--text-dim); }
+.check-list li b { font-family: var(--mono); font-weight: 600; white-space: nowrap; color: var(--danger); }
+.check-list li.ok b { color: var(--accent); }
+@media (max-width: 820px) { .spring-grid { grid-template-columns: 1fr; } }
+
+/* section practice */
+.mode-seg { margin-bottom: 1rem; }
+.picker-unit { margin: 1rem 0; max-width: 1000px; }
+.picker-head { display: flex; justify-content: space-between; gap: 1rem; align-items: center; flex-wrap: wrap; margin-bottom: .8rem; }
+.picker-head h3 { font-size: 1.15rem; margin-top: .2rem; }
+.picker-lessons { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: .5rem; }
+.picker-lesson { display: block; text-decoration: none; color: var(--text); border: 1px solid var(--border); border-radius: 6px; padding: .55rem .75rem; }
+.picker-lesson:hover { border-color: var(--accent-dim); background: var(--surface-2); }
+.picker-lesson b { font-size: 13.5px; font-weight: 550; display: block; }
+.picker-lesson small { color: var(--text-faint); font-size: 12px; }
+.picker-lesson.mastered { border-color: var(--accent-dim); }
+.picker-lesson.mastered small { color: var(--accent); }
+.practice { max-width: 760px; }
+.round-top { display: flex; gap: 1rem; align-items: baseline; flex-wrap: wrap; margin-bottom: .5rem; }
+.round-top b { flex: 1; }
+.round-result { text-align: left; }
+.rr-score { font-size: 3rem; text-transform: none; letter-spacing: -0.03em; color: var(--text); margin: .3rem 0 .4rem; font-family: var(--mono); }
+.missed { border-top: 1px solid var(--border); padding-top: .8rem; margin-top: .8rem; }
+.missed ol { padding-left: 1.2rem; margin: .3rem 0 0; line-height: 1.6; }

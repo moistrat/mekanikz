@@ -49,7 +49,7 @@ export default function App() {
         {route.page === 'learn' && <Learn lessonId={route.arg} />}
         {route.page === 'sandbox' && <Sandbox tutorialRequest={tutorialRequest} />}
         {route.page === 'games' && <Games game={route.arg} />}
-        {route.page === 'quiz' && <Quiz />}
+        {route.page === 'quiz' && <Quiz arg={route.arg} />}
       </main>
     </>
   )

@@ -2,6 +2,8 @@ export type WidgetId =
   | 'vectors' | 'incline' | 'lever' | 'truss' | 'kinematics' | 'projectile' | 'energy'
   | 'collision' | 'stressstrain' | 'beam' | 'gears' | 'spring' | 'hydraulic' | 'pulley'
   | 'carnot' | 'units' | 'bernoulli' | 'torsion'
+  | 'process' | 'momentarm' | 'supports' | 'stresstypes' | 'loads' | 'machines6' | 'geartypes' | 'frictiongraph' | 'kingraphs' | 'trussjoint'
+  | 'fbd' | 'cables' | 'flywheel' | 'column' | 'gas' | 'resonance' | 'engine' | 'depth' | 'impulse'
 
 export type Block =
   | { t: 'h'; text: string }

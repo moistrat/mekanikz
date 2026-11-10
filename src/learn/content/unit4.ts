@@ -16,6 +16,7 @@ export const unit4: Unit = {
         { t: 'h', text: 'Stress' },
         { t: 'formula', lines: ['σ = F / A', 'τ = V / A'], caption: 'Normal stress σ (force perpendicular to the area) and shear stress τ (force parallel to the area). Unit: pascal. In practice MPa = N/mm².' },
         { t: 'callout', kind: 'key', text: 'Stress is force **per area**. A big force on a big area can be gentler than a small force on a tiny area. That is why a sharp knife cuts and a blunt one does not, and why snowshoes keep you on top of the snow.' },
+        { t: 'widget', id: 'stresstypes' },
         { t: 'h', text: 'Strain and Hooke’s law' },
         { t: 'formula', lines: ['ε = ΔL / L₀', 'σ = E ε', 'ΔL = F L₀ / (A E)'], caption: 'Strain ε is a ratio, with no units. E is Young’s modulus: how stiff the material is.' },
         { t: 'table', head: ['Material', 'E (GPa)', 'Yield strength (MPa)'], rows: [['Steel (mild)', '200', '250'], ['Aluminium alloy', '69', '275'], ['Titanium alloy', '110', '880'], ['Concrete (compression)', '30', 'about 30'], ['Nylon', '2.5', '60'], ['Rubber', '0.01', 'n/a']] },
@@ -37,6 +38,7 @@ export const unit4: Unit = {
       goals: ['Find support reactions for a simply supported beam', 'Draw shear-force and bending-moment diagrams for a point load', 'Use σ = M y / I to find the bending stress'],
       blocks: [
         { t: 'p', text: 'A **beam** is a long member loaded sideways. Floors, bridge decks, shelves, aircraft wings and axles are all beams. Loads bend them, and the bending creates stresses that decide whether they survive.' },
+        { t: 'widget', id: 'loads' },
         { t: 'h', text: 'Internal forces' },
         { t: 'p', text: 'Imagine cutting a beam at any point. For the two halves to stay in equilibrium, the cut surface must carry an internal **shear force V** (a vertical force that tries to slice the beam) and a **bending moment M** (a couple that tries to curve it). Plotting V and M along the beam gives the shear and moment diagrams.' },
         { t: 'widget', id: 'beam' },
@@ -96,6 +98,7 @@ export const unit4: Unit = {
         { t: 'h', text: 'Buckling' },
         { t: 'formula', lines: ['P_cr = π² E I / (K L)²'], caption: 'Euler’s critical load for a slender column. K depends on the end supports (1 for pinned-pinned, 0.5 for fixed-fixed, 2 for fixed-free).' },
         { t: 'p', text: 'The critical load drops with the **square of the length**: a column twice as long carries only a quarter of the load. Stocky columns crush; slender ones buckle. A ruler is easy to bow but very hard to compress by crushing, and you can feel that difference with your hands.' },
+        { t: 'widget', id: 'column' },
         { t: 'check', id: 'fail-1', q: 'A bracket must carry a load that produces 80 MPa. The steel yields at 240 MPa. The factor of safety is', options: ['0.33', '3', '160', '320'], correct: 1, explain: 'FS = 240 / 80 = 3.' },
         { t: 'check', id: 'fail-2', q: 'A part breaks after millions of load cycles, at a stress well below its yield strength. This is', options: ['creep', 'buckling', 'fatigue', 'plastic yielding'], correct: 2, explain: 'Fatigue is failure from repeated loading, usually starting at a stress concentration.' },
         { t: 'check', id: 'fail-3', q: 'A slender column is made twice as long (same cross-section and supports). Its Euler buckling load becomes', options: ['half', 'one quarter', 'one eighth', 'unchanged'], correct: 1, explain: 'P_cr is proportional to 1/L², so doubling L gives one quarter of the load.' },

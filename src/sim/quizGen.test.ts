@@ -27,3 +27,39 @@ describe('quiz generator', () => {
     expect(hits.moment).toBe(1)
   })
 })
+
+describe('section practice', () => {
+  it('every lesson has repeatable generators and a valid round', async () => {
+    const { LESSONS, UNITS } = await import('../learn/content')
+    const { generatorsForLesson, generateFromLessons } = await import('./quizGen')
+    const { buildRound, SCOPES, scopeById } = await import('./practice')
+    for (const l of LESSONS) {
+      expect(generatorsForLesson(l.id).length, l.id).toBeGreaterThanOrEqual(3)
+      for (let s = 1; s <= 30; s++) {
+        const q = generateFromLessons([l.id], 1 + (s % 3), s * 31)
+        expect(q.lesson).toBe(l.id)
+        expect(isFinite(q.answer) && q.answer !== 0, q.prompt).toBe(true)
+        expect(checkAnswer(q, q.answer)).toBe(true)
+        expect(q.prompt + q.explanation.join(' ')).not.toMatch(/NaN|undefined|Infinity/)
+      }
+    }
+    expect(SCOPES.length).toBe(LESSONS.length + UNITS.length)
+    for (const sc of SCOPES) {
+      expect(scopeById(sc.id)).toBeTruthy()
+      for (let s = 1; s <= 10; s++) {
+        const round = buildRound(sc.lessons, 10, s * 101)
+        expect(round.length, sc.id).toBe(10)
+        expect(round.filter((i) => i.kind === 'num').length, sc.id).toBeGreaterThanOrEqual(6)
+        for (const it of round) {
+          if (it.kind === 'mc') { expect(it.options[it.correct]).toBeTruthy(); expect(sc.lessons).toContain(it.lesson) }
+          else expect(sc.lessons).toContain(it.q.lesson)
+        }
+      }
+    }
+  })
+  it('rounds differ from each other (new numbers each time)', async () => {
+    const { buildRound } = await import('./practice')
+    const a = JSON.stringify(buildRound(['moments'], 10, 1)), b = JSON.stringify(buildRound(['moments'], 10, 2))
+    expect(a).not.toBe(b)
+  })
+})

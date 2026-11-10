@@ -1,6 +1,14 @@
 import { ReactNode, useState } from 'react'
 import { load, save } from '../state/storage'
 
+export type Diff = 'easy' | 'normal' | 'hard'
+export const DIFFS: { id: Diff; name: string; blurb: string }[] = [
+  { id: 'easy', name: 'Easy', blurb: 'Ideal physics, gentle numbers, hints on.' },
+  { id: 'normal', name: 'Normal', blurb: 'Standard problems that get harder as you win.' },
+  { id: 'hard', name: 'Real world', blurb: 'Friction, drag, wind, loads and tolerances.' },
+]
+export interface Props { difficulty: Diff; onDifficulty: (d: Diff) => void }
+
 export interface Stats { played: number; won: number; streak: number; best: number }
 const EMPTY: Stats = { played: 0, won: 0, streak: 0, best: 0 }
 
@@ -15,8 +23,9 @@ export function useStats(key: string): [Stats, (win: boolean) => void, () => voi
   return [s, record, reset]
 }
 
-export function GameShell({ title, how, stats, onReset, level, children }: {
+export function GameShell({ title, how, stats, onReset, level, children, difficulty, onDifficulty, factors }: {
   title: string; how: string; stats: Stats; onReset: () => void; level?: number; children: ReactNode
+  difficulty: Diff; onDifficulty: (d: Diff) => void; factors?: string[]
 }) {
   return (
     <div className="page game">
@@ -25,6 +34,12 @@ export function GameShell({ title, how, stats, onReset, level, children }: {
           <a className="link small" href="#/games">All games</a>
           <h1>{title}{level ? <span className="lvl">Level {level}</span> : null}</h1>
           <p className="muted" style={{ maxWidth: '62ch' }}>{how}</p>
+          <div className="seg diff-seg" role="group" aria-label="Difficulty">
+            {DIFFS.map((d) => <button key={d.id} className={d.id === difficulty ? 'on' : ''} title={d.blurb} onClick={() => d.id !== difficulty && onDifficulty(d.id)}>{d.name}</button>)}
+          </div>
+          {factors && factors.length > 0 && (
+            <p className="factors"><span>Real-world factors</span>{factors.map((f) => <b key={f}>{f}</b>)}</p>
+          )}
         </div>
         <div className="scoreboard card">
           <div><b>{stats.won}</b><small>/ {stats.played} solved</small></div>

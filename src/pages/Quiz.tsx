@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { checkAnswer, generateQuestion, LEVELS, Question, Topic, TOPICS } from '../sim/quizGen'
 import { formatSI } from '../sim/format'
 import { load, save } from '../state/storage'
+import { Round, SectionPicker } from './Practice'
+import { scopeById } from '../sim/practice'
 
 interface Score { answered: number; correct: number; streak: number; best: number }
 const EMPTY: Score = { answered: 0, correct: 0, streak: 0, best: 0 }
@@ -59,7 +61,20 @@ function QuizCard({ q, onResult, onNext }: { q: Question; onResult: (ok: boolean
   )
 }
 
-export function Quiz() {
+export function Quiz({ arg }: { arg?: string }) {
+  const scope = scopeById(arg)
+  const section = !!scope || arg === 'sections'
+  const switcher = (
+    <div className="seg mode-seg" role="group" aria-label="Quiz mode">
+      <button className={!section ? 'on' : ''} onClick={() => { location.hash = '#/quiz' }}>Free practice</button>
+      <button className={section ? 'on' : ''} onClick={() => { location.hash = '#/quiz/sections' }}>Section practice</button>
+    </div>
+  )
+  if (section) return <div className="page quiz">{switcher}{scope ? <Round scopeId={scope.id} /> : <SectionPicker />}</div>
+  return <FreeQuiz switcher={switcher} />
+}
+
+function FreeQuiz({ switcher }: { switcher: React.ReactNode }) {
   const [topic, setTopic] = useState<Topic | 'all'>(() => load('mekanikz.quiz.topic', 'all'))
   const [level, setLevel] = useState(() => load<number>('mekanikz.quiz.level', 1))
   const [score, setScore] = useState<Score>(() => load('mekanikz.quiz.score', EMPTY))
@@ -72,6 +87,7 @@ export function Quiz() {
   }
   return (
     <div className="page quiz">
+      {switcher}
       <div className="quiz-top">
         <div className="levels" role="tablist" style={{ gridTemplateColumns: 'repeat(3, minmax(0, 1fr))' }}>
           {LEVELS.map((l) => (
